@@ -1,3 +1,4 @@
+//№1
 //var str = "Have a good day!";
 //console.log(str);
 //N2
