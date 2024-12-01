@@ -1,3 +1,4 @@
+//Шестая лабораторная работа, вариант 7,19
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
