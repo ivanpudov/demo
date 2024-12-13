@@ -1,31 +1,33 @@
-import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
+import math
+import turtle
 
-st.title("Визуализация кода в Streamlit")
-st.write("Результат работы программы:")
 
-# Определение функций
 def xt(t):
-    return 16 * np.sin(t) ** 3
+    return 16 * math.sin(t) ** 3
+
 
 def yt(t):
-    return 13 * np.cos(t) - 5 * np.cos(2 * t) - 2 * np.cos(3 * t) - np.cos(4 * t)
+    return 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
 
-# Создание данных для графика
-t_values = np.linspace(0, 2 * np.pi, 2550)  # Шаг для плавного графика
-x_values = xt(t_values) * 20
-y_values = yt(t_values) * 20
 
-# Построение графика
-plt.figure(figsize=(8, 8), facecolor="black")
-plt.plot(x_values, y_values, color="red", lw=1)
+# Инициализация черепахи и настроек
+t = turtle.Turtle()
+t.speed(0)  # Максимальная скорость черепахи
+turtle.colormode(255)  # Установка цветовой модели в RGB
+turtle.Screen().bgcolor(0, 0, 0)  # Установка фона в черный цвет
 
-# Оформление графика
-plt.axis("off")  # Убираем оси
-plt.gca().set_aspect("equal", adjustable="box")  # Сохраняем пропорции
-plt.tight_layout()
+# Начало рисования
+t.penup()  # Поднимаем перо, чтобы избежать линии от начала
+t.goto(0, 0)  # Устанавливаем начальную позицию
+t.pendown()  # Опускаем перо
 
-# Отображение графика в Streamlit
-st.pyplot(plt)
-st.write("Готово!")
+for i in range(2550):
+    angle = i * 0.01  # Уменьшена шаговая величина для более плавного движения
+    x = xt(angle) * 20  # Масштабируем X
+    y = yt(angle) * 20  # Масштабируем Y
+    t.pencolor((255 - i % 255, i % 255, (255 + i // 2) % 255))  # Установка цвета пера
+    t.goto(x, y)  # Перемещаем черепаху
+
+# Завершаем
+t.hideturtle()  # Скрываем черепаху
+turtle.done()  # Завершаем графический цикл
